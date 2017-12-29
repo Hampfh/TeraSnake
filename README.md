@@ -1,2 +1,3 @@
 # TeraSnake
-:D
+
+A simple fun snake game

@@ -3,6 +3,11 @@
 #include <iostream>
 #include "Snake.h"
 
+struct storageUnit {
+	storageUnit* next = nullptr;
+	Snake* unit = nullptr;
+};
+
 class storageList {
 public:
 	storageList();
@@ -10,11 +15,6 @@ public:
 	void addNewUnit(Snake* unitToAdd);
 	bool isColliding(int testX, int testY);
 public:
-	struct storageUnit {
-		storageUnit* next = nullptr;
-		Snake* unit = nullptr;
-	};
-
 	storageUnit *firstObject = nullptr;
 	storageUnit *lastObject = nullptr;
 

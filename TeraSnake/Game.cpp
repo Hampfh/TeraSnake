@@ -19,7 +19,6 @@ Game::~Game()
 }
 
 int Game::loop() {
-	textAddOn->setColor(150, 20, 75);
 	while (true) {
 		pollEvents(*window, *playerSnake);
 
@@ -31,6 +30,7 @@ int Game::loop() {
 		textAddOn->drawText();
 
 		if (playerSnake->update(&playerExpectedLength, &score, collisionObjects, lengthAmplifier)) {
+			playerSnake->deathAnimation(window, allObjects, textGrid, textAddOn);
 			break;
 		}
 
@@ -40,7 +40,7 @@ int Game::loop() {
 		window->refresh();
 
 		if (window->isClosed()) {
-			break;
+			return -1;
 		}
 		SDL_Delay(75);
 	}
@@ -52,8 +52,9 @@ int Game::reset() {
 	delete textGrid;
 	delete playerSnake;
 	delete wall;
+	delete textAddOn;
+	delete lengthAmplifier;
 	//delete enemySnake;
-	//delete textAddOn;
 
 	score = 0;
 	playerExpectedLength = startLength;
@@ -65,12 +66,10 @@ int Game::reset() {
 int Game::setup() {
 
 	mainGrid = new Grid(gridSize_x, gridSize_y);
-	mainGrid->setColor(255, 255, 255);
 	mainGrid->setSpacing(0);
 	mainGrid->setDotSize(15);
 
 	textGrid = new Grid(75, 10);
-	textGrid->setColor(0, 0, 255);
 	textGrid->setSpacing(0);
 	textGrid->setOffset(0, 750);
 	textGrid->setDotSize(10);
@@ -81,18 +80,33 @@ int Game::setup() {
 
 	wall = new walls(mainGrid, 0, 0);
 	wall->createWallFrame(mainGrid, gridSize_x, gridSize_y);
-	wall->setColor(0, 0, 255);
-
+	
 	lengthAmplifier = new lengthPoints(mainGrid, 0, 0);
 
 	collisionObjects = new storageList;
 	collisionObjects->addNewUnit(playerSnake);
 	collisionObjects->addNewUnit(wall);
 
+	allObjects = new storageList;
+	allObjects->addNewUnit(playerSnake);
+	allObjects->addNewUnit(wall);
+	allObjects->addNewUnit(lengthAmplifier);
+
 	for (int i = 0; i < 3; i++) {
 		lengthAmplifier->findNewSpawnPosition(collisionObjects, gridSize_x);
 	}
-	lengthAmplifier->setColor(255, 128, 0);
 
+	setup_colors();
+
+	return 1;
+}
+
+int Game::setup_colors() {
+	mainGrid->setColor(50, 50, 50);
+	textAddOn->setColor(15, 128, 140);
+	playerSnake->setColor(0, 120, 0);
+	wall->setColor(30, 30, 30);
+	lengthAmplifier->setColor(204, 102, 0);
+	textGrid->setColor(wall->getColor().r, wall->getColor().g, wall->getColor().b);
 	return 1;
 }

@@ -17,6 +17,7 @@ public:
 	void setColor(int r, int g, int b);
 	inline Node* getFirstNode() { return _firstNode; };
 	inline Node* getLastNode() { return _lastNode; };
+	inline colorTemplate getColor() { return color; };
 protected:
 	colorTemplate color;
 	int snakeLength;

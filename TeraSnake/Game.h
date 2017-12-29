@@ -16,6 +16,7 @@ public:
 	int loop();
 	int reset();
 	int setup();
+	int setup_colors();
 private:
 	std::string scoreText;
 	int gridSize_x = 50, gridSize_y = 50;
@@ -32,6 +33,7 @@ private:
 	lengthPoints* lengthAmplifier = nullptr;
 
 	storageList* collisionObjects = nullptr;
+	storageList* allObjects = nullptr;
 
 	int score = 0;
 	int playerExpectedLength = 10;

@@ -4,10 +4,7 @@ player::player(Grid* mainGrid, int start_x, int start_y, int collisionListSize) 
 	_mainGrid = mainGrid;
 	_snakeHead_x = start_x;
 	_snakeHead_y = start_y;
-	color.g = 255;
-
-	ifSelf[PLAYER] = true;
-	
+	color.g = 255;	
 }
 
 player::~player(){
@@ -37,21 +34,31 @@ void player::pollEvent(SDL_Event &evnt){
 	}
 }
 
-bool player::update(int expectedLength, int* playerScore, storageList* collisions) {
+bool player::update(int* expectedLength, int* playerScore, storageList* collisions, lengthPoints* lengthAmplifier) {
 	move(direction);
 
 	if (collisions->isColliding(_snakeHead_x, _snakeHead_y)) {
-		std::cout << "Player crashed" << std::endl;
 		return 1;
 	}
-
+	
+	if (lengthAmplifier != nullptr) {
+		if (lengthAmplifier->collision(_snakeHead_x, _snakeHead_y)) {
+			lengthAmplifier->removeSpecificPart(_snakeHead_x, _snakeHead_y);
+			lengthAmplifier->findNewSpawnPosition(collisions, _mainGrid->getGridSize().w);
+			(*expectedLength)++;
+			(*playerScore)++;
+		}
+	}
+	
 	addNewLastPart();
 
-	if (snakeLength > expectedLength) {
+	if (snakeLength > *expectedLength) {
 		removeFirstPart();
 	}
 
 	draw();
+	_lastNode->link->setColor(255, 0, 0);
+	_lastNode->link->draw();
 
 	return false;
 }

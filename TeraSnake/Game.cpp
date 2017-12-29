@@ -20,7 +20,6 @@ Game::~Game()
 
 int Game::loop() {
 	textAddOn->setColor(150, 20, 75);
-	std::cout << "Start" << std::endl;
 	while (true) {
 		pollEvents(*window, *playerSnake);
 
@@ -31,11 +30,13 @@ int Game::loop() {
 		textAddOn->createText(textGrid->dot(2, 1), scoreText);
 		textAddOn->drawText();
 
-		if (playerSnake->update(playerExpectedLength, &score, collisionObjects)) {
+		if (playerSnake->update(&playerExpectedLength, &score, collisionObjects, lengthAmplifier)) {
 			break;
 		}
 
 		wall->draw();
+		lengthAmplifier->draw();
+
 		window->refresh();
 
 		if (window->isClosed()) {
@@ -74,16 +75,24 @@ int Game::setup() {
 	textGrid->setOffset(0, 750);
 	textGrid->setDotSize(10);
 
+	textAddOn = new Text;
+
 	playerSnake = new player(mainGrid, 20, 20, 10);
 
 	wall = new walls(mainGrid, 0, 0);
 	wall->createWallFrame(mainGrid, gridSize_x, gridSize_y);
 	wall->setColor(0, 0, 255);
 
-	textAddOn = new Text();
+	lengthAmplifier = new lengthPoints(mainGrid, 0, 0);
 
 	collisionObjects = new storageList;
 	collisionObjects->addNewUnit(playerSnake);
 	collisionObjects->addNewUnit(wall);
+
+	for (int i = 0; i < 3; i++) {
+		lengthAmplifier->findNewSpawnPosition(collisionObjects, gridSize_x);
+	}
+	lengthAmplifier->setColor(255, 128, 0);
+
 	return 1;
 }

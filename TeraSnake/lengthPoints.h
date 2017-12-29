@@ -1,8 +1,13 @@
 #pragma once
-class lengthPoints
+#include "functions.h"
+#include <random>
+#include "Snake.h"
+
+class lengthPoints : public Snake
 {
 public:
-	lengthPoints();
+	lengthPoints(Grid* mainGrid, int start_x, int start_y);
 	~lengthPoints();
+	void findNewSpawnPosition(storageList* collisions, int gridSize);
 };
 

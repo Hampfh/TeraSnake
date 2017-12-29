@@ -9,7 +9,7 @@ public:
 	~storageList();
 	void addNewUnit(Snake* unitToAdd);
 	bool isColliding(int testX, int testY);
-private:
+public:
 	struct storageUnit {
 		storageUnit* next = nullptr;
 		Snake* unit = nullptr;

@@ -15,14 +15,12 @@ void storageList::addNewUnit(Snake* unitToAdd) {
 		lastObject = firstObject;
 		lastObject->unit = unitToAdd;
 		listSize++;
-		std::cout << "NEW" << std::endl;
 	}
 	else {
 		lastObject->next = temp;
 		lastObject = lastObject->next;
 		lastObject->unit = unitToAdd;
 		listSize++;
-		std::cout << "ADDON" << std::endl;
 	}
 }
 
@@ -31,13 +29,11 @@ bool storageList::isColliding(int testX, int testY) {
 	int i = 0;
 	while (currentPointer != lastObject) {
 		if (currentPointer->unit->collision(testX, testY)) {
-			std::cout << i << std::endl;
 			return true;
 		}
 		currentPointer = currentPointer->next;
 	}
 	if (currentPointer->unit->collision(testX, testY)) {
-		std::cout << i << std::endl;
 		return true;
 	}
 	return false;

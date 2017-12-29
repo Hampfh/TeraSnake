@@ -24,11 +24,12 @@ private:
 
 	Grid* mainGrid = nullptr;
 	Grid* textGrid = nullptr;
+	Text* textAddOn = nullptr;
+
 
 	player* playerSnake = nullptr;
 	walls* wall = nullptr;
-
-	Text* textAddOn = nullptr;
+	lengthPoints* lengthAmplifier = nullptr;
 
 	storageList* collisionObjects = nullptr;
 

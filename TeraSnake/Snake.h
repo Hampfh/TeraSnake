@@ -29,7 +29,5 @@ protected:
 
 	Node* _firstNode = nullptr;
 	Node* _lastNode = nullptr;
-
-	bool ifSelf[10];
 };
 

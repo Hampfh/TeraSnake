@@ -4,10 +4,6 @@ Snake::Snake() {
 	color.r = 0;
 	color.g = 0;
 	color.b = 0;
-
-	for (int i = 0; i < 10; i++) {
-		ifSelf[i] = false;
-	}
 }
 
 
@@ -55,8 +51,6 @@ bool Snake::collision(int x, int y) {
 	Node* currentPointer = _firstNode;
 	while (currentPointer != _lastNode) {
 		if (currentPointer->link->getCoords().x == x && currentPointer->link->getCoords().y == y) {
-			std::cout << currentPointer->link->getCoords().x << " : " << currentPointer->link->getCoords().y << 
-				"\nTest coords: " << x << " : " << y << std::endl;
 			return true;
 		}
 		currentPointer = currentPointer->next;

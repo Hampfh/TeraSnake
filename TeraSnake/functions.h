@@ -13,7 +13,9 @@ public:
 	storageList();
 	~storageList();
 	void addNewUnit(Snake* unitToAdd);
+	bool draw();
 	bool isColliding(int testX, int testY);
+	bool switchContent(int ID, Snake* newObject);
 public:
 	storageUnit *firstObject = nullptr;
 	storageUnit *lastObject = nullptr;

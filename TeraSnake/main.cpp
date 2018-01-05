@@ -8,10 +8,10 @@ Window* window = new Window("TeraSnake", 750, 840);
 int playerScore = 0;
 
 int main(int argc, char** argv) {
-	FreeConsole();
+	//FreeConsole();
 	menu mainMenu(window);
 	Game game(window);
-	mainMenu.loop(1);
+	mainMenu.switchFunction(0);
 	while (true) {
 		playerScore = game.loop();
 		if (playerScore == -1) {
@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 		}
 		game.reset();
 
-		if (mainMenu.loop(2, playerScore) == -1) {
+		if (mainMenu.switchFunction(1, playerScore) == -1) {
 			break;
 		}
 		game.setup();

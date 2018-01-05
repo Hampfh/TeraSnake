@@ -18,6 +18,9 @@ public:
 	inline Node* getFirstNode() { return _firstNode; };
 	inline Node* getLastNode() { return _lastNode; };
 	inline colorTemplate getColor() { return color; };
+	inline int getDirection() { return direction; };
+public:
+	int SNAKE_ID;
 protected:
 	colorTemplate color;
 	int snakeLength;

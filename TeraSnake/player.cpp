@@ -1,10 +1,9 @@
 #include "player.h"
 
-player::player(Grid* mainGrid, int start_x, int start_y, int collisionListSize) {
+player::player(Grid* mainGrid, int start_x, int start_y) {
 	_mainGrid = mainGrid;
 	_snakeHead_x = start_x;
 	_snakeHead_y = start_y;
-	color.g = 255;	
 }
 
 player::~player(){

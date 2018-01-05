@@ -49,13 +49,18 @@ void Snake::addNewSpecificPart(int x, int y) {
 
 bool Snake::collision(int x, int y) {
 	Node* currentPointer = _firstNode;
+
+	if (_firstNode == nullptr && _lastNode == nullptr) {
+		return false;
+	}
+
 	while (currentPointer != _lastNode) {
 		if (currentPointer->link->getCoords().x == x && currentPointer->link->getCoords().y == y) {
 			return true;
 		}
 		currentPointer = currentPointer->next;
 	}
-	if (currentPointer != nullptr) {
+	if (currentPointer == _lastNode) {
 		if (currentPointer->link->getCoords().x == x && currentPointer->link->getCoords().y == y) {
 			return true;
 		}

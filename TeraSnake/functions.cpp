@@ -24,17 +24,42 @@ void storageList::addNewUnit(Snake* unitToAdd) {
 	}
 }
 
+bool storageList::draw() {
+	storageUnit* currentPointer = firstObject;
+
+	while (currentPointer != lastObject) {
+		currentPointer->unit->draw();
+		currentPointer = currentPointer->next;
+	}
+	currentPointer->unit->draw();
+	return true;
+}
+
 bool storageList::isColliding(int testX, int testY) {
 	storageUnit* currentPointer = firstObject;
-	int i = 0;
+	
 	while (currentPointer != lastObject) {
 		if (currentPointer->unit->collision(testX, testY)) {
 			return true;
 		}
 		currentPointer = currentPointer->next;
 	}
-	if (currentPointer->unit->collision(testX, testY)) {
+	if (lastObject->unit->collision(testX, testY)) {
 		return true;
+	}
+	return false;
+}
+
+bool storageList::switchContent(int ID, Snake* newObject) {
+	storageUnit* currentPointer = firstObject;
+
+	while (currentPointer != lastObject) {
+		if (currentPointer->unit->SNAKE_ID == ID) {
+			delete currentPointer->unit;
+			currentPointer->unit = newObject;
+			return true;
+		}
+		currentPointer = currentPointer->next;
 	}
 	return false;
 }

@@ -36,9 +36,41 @@ menu::~menu() {
 
 }
 
-int menu::loop(int menu, int score) {
 
-	while (menu == 1) {
+void menu::pollEvent(SDL_Event &evnt, int menu) {
+
+	switch (evnt.type) {
+	case SDL_KEYDOWN:
+		switch (evnt.key.keysym.sym) {
+		case SDLK_SPACE:
+			ready = true;
+			break;
+		case SDLK_h:
+			switchFunction(2);
+			break;
+		}
+		break;
+	}
+}
+
+int menu::switchFunction(int menu, int score) {
+
+	switch (menu) {
+	case 0:
+		startMenu();
+		break;
+	case 1:
+		deathMenu(score);
+		break;
+	case 2:
+		highScoreMenu();
+		break;
+	}
+	return 1;
+}
+
+void menu::startMenu() {
+	while (true) {
 		pollEvents(*_window, this);
 
 		menuGrid->drawDefaults();
@@ -60,11 +92,46 @@ int menu::loop(int menu, int score) {
 
 		if (_window->isClosed() == true || ready == true) {
 			ready = false;
-			return 0;
+			break;
 		}
 	}
-	while (menu == 2) {
+}
 
+void menu::deathMenu(int score) {
+	std::string line;
+	std::fstream file;
+
+	playerStat* first = nullptr;
+	playerStat* last = nullptr;
+
+	file.open("scores.txt", std::fstream::out | std::fstream::in);
+
+	if (file.is_open()) {
+		for (int i = 0; i < 20; i++){
+			getline(file, line);
+
+			playerStat* temp = new playerStat;
+
+			if (first == nullptr) {
+				first = temp;
+				last = first;
+			}
+			else {
+				last->next = temp;
+				last = last->next;
+			}
+			temp->totalString = line;
+		}
+	}
+	else {
+		std::cout << "FAIL" << std::endl;
+	}
+
+	// Makes the file hidden
+	DWORD attributes = GetFileAttributes("scores.txt");
+	SetFileAttributes("scores.txt", attributes + FILE_ATTRIBUTE_HIDDEN);
+
+	while (true) {
 		pollEvents(*_window, this);
 
 		menuGrid->drawDefaults();
@@ -86,21 +153,8 @@ int menu::loop(int menu, int score) {
 			break;
 		}
 	}
-	if (_window->isClosed() == true) {
-		return -1;
-	}
-	return 0;
 }
 
-void menu::pollEvent(SDL_Event &evnt) {
+void menu::highScoreMenu() {
 
-	switch (evnt.type) {
-	case SDL_KEYDOWN:
-		switch (evnt.key.keysym.sym) {
-		case SDLK_SPACE:
-			ready = true;
-			break;
-		}
-		break;
-	}
 }

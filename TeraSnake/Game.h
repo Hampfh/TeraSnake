@@ -5,8 +5,8 @@
 #include "lengthPoints.h"
 #include "player.h"
 #include "walls.h"
-#include "Window.h"
-#include "Text.h"
+#include <Window.h>
+#include <Text.h>
 
 class Game
 {
@@ -27,16 +27,18 @@ private:
 	Grid* textGrid = nullptr;
 	Text* textAddOn = nullptr;
 
-
 	player* playerSnake = nullptr;
 	walls* wall = nullptr;
 	lengthPoints* lengthAmplifier = nullptr;
+	enemy* enemySnake = nullptr;
 
 	storageList* collisionObjects = nullptr;
 	storageList* allObjects = nullptr;
 
 	int score = 0;
 	int playerExpectedLength = 10;
+	int enemyExpectedLength = 10;
 	const int startLength = 10;
+	const int enemyStartLength = 10;
 };
 

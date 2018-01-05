@@ -1,18 +1,30 @@
 #pragma once
+#include <fstream>
 #include "Window.h"
+#include <Windows.h>
 #include "Grid.h"
 #include "text.h"
 #include <iostream>
 #include <SDL.h>
 #include <string>
 
+struct playerStat {
+	playerStat* next = nullptr;
+	std::string totalString;
+	std::string name;
+	int score;
+};
+
 class menu
 {
 public:
 	menu(Window *window);
 	~menu();
-	int loop(int menu, int score = 0);
-	void pollEvent(SDL_Event &evnt);
+	void pollEvent(SDL_Event &evnt, int menu = 0);
+	int switchFunction(int menu, int score = 0);
+	void startMenu();
+	void deathMenu(int score);
+	void highScoreMenu();
 private:
 	Window * _window = nullptr;
 	Grid* menuGrid = nullptr;
@@ -26,4 +38,3 @@ private:
 public:
 	bool ready = false;
 };
-

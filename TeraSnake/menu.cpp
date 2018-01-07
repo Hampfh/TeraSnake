@@ -99,33 +99,16 @@ void menu::startMenu() {
 
 void menu::deathMenu(int score) {
 	std::string line;
-	std::fstream file;
+	std::ofstream file;
 
 	playerStat* first = nullptr;
 	playerStat* last = nullptr;
 
-	file.open("scores.txt", std::fstream::out | std::fstream::in);
+	file.open("scores.txt", std::ofstream::app);
 
-	if (file.is_open()) {
-		for (int i = 0; i < 20; i++){
-			getline(file, line);
-
-			playerStat* temp = new playerStat;
-
-			if (first == nullptr) {
-				first = temp;
-				last = first;
-			}
-			else {
-				last->next = temp;
-				last = last->next;
-			}
-			temp->totalString = line;
-		}
-	}
-	else {
-		std::cout << "FAIL" << std::endl;
-	}
+	file << "Wilhelm|" + std::to_string(score) + "\n";
+	
+	file.close();
 
 	// Makes the file hidden
 	DWORD attributes = GetFileAttributes("scores.txt");

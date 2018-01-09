@@ -1,19 +1,13 @@
 #pragma once
 #include <fstream>
-#include "Window.h"
+#include <Window.h>
 #include <Windows.h>
 #include "Grid.h"
 #include "text.h"
 #include <iostream>
 #include <SDL.h>
 #include <string>
-
-struct playerStat {
-	playerStat* next = nullptr;
-	std::string totalString;
-	std::string name;
-	int score;
-};
+#include "sortingTree.h"
 
 class menu
 {
@@ -27,14 +21,19 @@ public:
 	void highScoreMenu();
 private:
 	Window * _window = nullptr;
-	Grid* menuGrid = nullptr;
-	Grid* menuGridTwo = nullptr;
-	Grid* menuGridThree = nullptr;
 	Text* menuTitle = nullptr;
 
 	std::string scoreText = "";
+	int nameLengthLimit = 10;
+	std::string name;
 
 	int titleWidth;
+
+	// Highscore menu
+	int segmentCounter = 0;
+	int row = 0;
 public:
 	bool ready = false;
+	bool insideHighScoreButton = false;
+	int mouseX, mouseY;
 };

@@ -24,6 +24,7 @@ void player::deathAnimation(Window* window, storageList* allObjects, Grid* textG
 				currentPointer->unit->draw();
 				currentPointer = currentPointer->next;
 			}
+			currentPointer->unit->draw();
 			temp->link->setColor(140, 0, 0);
 			temp->link->draw();
 			window->refresh();
@@ -39,6 +40,7 @@ void player::deathAnimation(Window* window, storageList* allObjects, Grid* textG
 				currentPointer->unit->draw();
 				currentPointer = currentPointer->next;
 			}
+			currentPointer->unit->draw();
 			temp->link->setColor(100, 100, 100);
 			temp->link->draw();
 			window->refresh();

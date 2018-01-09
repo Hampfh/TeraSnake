@@ -6,9 +6,9 @@
 
 Window* window = new Window("TeraSnake", 750, 840);
 int playerScore = 0;
-
+std::string playerName;
 int main(int argc, char** argv) {
-	//FreeConsole();
+	FreeConsole();
 	menu mainMenu(window);
 	Game game(window);
 	mainMenu.switchFunction(0);

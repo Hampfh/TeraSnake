@@ -25,10 +25,6 @@ int Game::loop() {
 		mainGrid->drawDefaults();
 		textGrid->drawDefaults();
 
-		scoreText = "Score:" + std::to_string(score);
-		textAddOn->createText(textGrid->dot(2, 1), scoreText);
-		textAddOn->drawText();
-
 		if (playerSnake->update(&playerExpectedLength, &score, collisionObjects, lengthAmplifier)) {
 			playerSnake->deathAnimation(window, allObjects, textGrid, textAddOn);
 			break;
@@ -37,6 +33,10 @@ int Game::loop() {
 		if (enemySnake->update(&enemyExpectedLength, collisionObjects, lengthAmplifier, playerSnake)) {
 			enemySnake->killed();
 		}
+
+		scoreText = "Score:" + std::to_string(score);
+		textAddOn->createText(textGrid->dot(2, 1), scoreText);
+		textAddOn->drawText();
 
 		wall->draw();
 		lengthAmplifier->draw();
@@ -101,7 +101,7 @@ int Game::setup() {
 	allObjects = new storageList;
 	allObjects->addNewUnit(playerSnake);
 	allObjects->addNewUnit(wall);
-	collisionObjects->addNewUnit(enemySnake);
+	allObjects->addNewUnit(enemySnake);
 	allObjects->addNewUnit(lengthAmplifier);
 
 	for (int i = 0; i < 3; i++) {

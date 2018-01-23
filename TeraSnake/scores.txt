@@ -1,4 +1,4 @@
-TheLegend29|1000000
+TheLegend27|1000000
 Hampfh|17
 Test|18
 test|0
@@ -7,3 +7,39 @@ test|1
 test|0
 test|1
 Test|2
+HEJSVEJS|7
+HYPERBRUH|0
+HYPERBRUH|1
+HYPERBRUH|3
+HYPERBRUH |5
+HYPERBRUH |2
+HYPERBRUH |6
+HYPERBRUH |4
+Edvin|11
+Edvin |0
+Edvin |2
+Edvin |1
+Edvin |2
+Edvin |0
+Edvin|4
+Edvin|4
+Edvin|5
+Edvin|1
+Edvin|5
+Edvin|3
+Edvin|3
+Edvin|3
+Edvin|0
+Edvin|1
+Edvin|5
+Edvin|8
+Edvin|3
+Edvin|0
+Edvin|7
+Edvin|2
+Edvin|5
+Edvin|0
+Hampfh|0
+Hampfhg|2
+Hampfhg|4
+Hampfh|10
